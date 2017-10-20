@@ -8,13 +8,31 @@
 
 import UIKit
 import Eureka
+import CoreData
 
 class AddViewController: FormViewController {
     
     var viewModel  = BusStopViewModel()
+    var context : NSManagedObjectContext! = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+
+    
+    
+    @IBAction func CancelAction(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+
+    @IBAction func SaveRoute(_ sender: UIBarButtonItem) {
+        _ = BusStopMO.CreateBusStopMO(stopCode: Int64(viewModel.stopcodeVm), bookmarkName: viewModel.bookmarknameVm, busNumber: viewModel.busnumberVm, creation: Date(), in: context)
+        do {
+            try context.save()
+        } catch {
+            print(error)
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        context  = container.viewContext
         
         form
             +++ Section()    //2
@@ -25,19 +43,25 @@ class AddViewController: FormViewController {
                 $0.onChange { [unowned self] row in //6
                     self.viewModel.busnumberVm = row.value
                     }
-                
-                        
-                }
+      
+            }
             +++ Section()
             <<< TextRow() { // 3
                 $0.title = "Stop Code" //4
                 $0.placeholder = "e.g. 51536"
                 $0.value = viewModel.stopcodeVm //5
                 $0.onChange { [unowned self] row in //6
-                    self.viewModel.busnumberVm = row.value
+                    self.viewModel.stopcodeVm = row.value
                 }
-                
-                
+            }
+            +++ Section()
+            <<< TextRow() { // 3
+                $0.title = "Name" //4
+                $0.placeholder = "Name your route"
+                $0.value = viewModel.bookmarknameVm //5
+                $0.onChange { [unowned self] row in //6
+                    self.viewModel.bookmarknameVm = row.value
+                }
         }
         
                 
