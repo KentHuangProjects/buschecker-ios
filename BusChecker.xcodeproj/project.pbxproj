@@ -8,13 +8,15 @@
 
 /* Begin PBXBuildFile section */
 		475E5DF81F99A7F500CF82E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5DF71F99A7F500CF82E0 /* AppDelegate.swift */; };
-		475E5DFA1F99A7F500CF82E0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5DF91F99A7F500CF82E0 /* ViewController.swift */; };
 		475E5DFD1F99A7F500CF82E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475E5DFB1F99A7F500CF82E0 /* Main.storyboard */; };
 		475E5E001F99A7F500CF82E0 /* BusChecker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 475E5DFE1F99A7F500CF82E0 /* BusChecker.xcdatamodeld */; };
 		475E5E021F99A7F500CF82E0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 475E5E011F99A7F500CF82E0 /* Assets.xcassets */; };
 		475E5E051F99A7F500CF82E0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475E5E031F99A7F500CF82E0 /* LaunchScreen.storyboard */; };
 		475E5E101F99A7F600CF82E0 /* BusCheckerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E0F1F99A7F600CF82E0 /* BusCheckerTests.swift */; };
 		475E5E1B1F99A7F600CF82E0 /* BusCheckerUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E1A1F99A7F600CF82E0 /* BusCheckerUITests.swift */; };
+		475E5E2A1F99B34C00CF82E0 /* BusStopUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */; };
+		475E5E2D1F99C23B00CF82E0 /* BusStopMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */; };
+		475E5E2F1F99D14000CF82E0 /* MessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E2E1F99D14000CF82E0 /* MessageMO.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,7 +39,6 @@
 /* Begin PBXFileReference section */
 		475E5DF41F99A7F500CF82E0 /* BusChecker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusChecker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475E5DF71F99A7F500CF82E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		475E5DF91F99A7F500CF82E0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		475E5DFC1F99A7F500CF82E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		475E5DFF1F99A7F500CF82E0 /* BusChecker.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = BusChecker.xcdatamodel; sourceTree = "<group>"; };
 		475E5E011F99A7F500CF82E0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -49,6 +50,9 @@
 		475E5E161F99A7F600CF82E0 /* BusCheckerUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BusCheckerUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		475E5E1A1F99A7F600CF82E0 /* BusCheckerUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusCheckerUITests.swift; sourceTree = "<group>"; };
 		475E5E1C1F99A7F600CF82E0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopUITableViewController.swift; sourceTree = "<group>"; };
+		475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopMO.swift; sourceTree = "<group>"; };
+		475E5E2E1F99D14000CF82E0 /* MessageMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMO.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -99,13 +103,13 @@
 		475E5DF61F99A7F500CF82E0 /* BusChecker */ = {
 			isa = PBXGroup;
 			children = (
+				475E5E2B1F99C1F300CF82E0 /* CoreData */,
+				475E5E281F99B30900CF82E0 /* FirstView */,
 				475E5DF71F99A7F500CF82E0 /* AppDelegate.swift */,
-				475E5DF91F99A7F500CF82E0 /* ViewController.swift */,
 				475E5DFB1F99A7F500CF82E0 /* Main.storyboard */,
 				475E5E011F99A7F500CF82E0 /* Assets.xcassets */,
 				475E5E031F99A7F500CF82E0 /* LaunchScreen.storyboard */,
 				475E5E061F99A7F500CF82E0 /* Info.plist */,
-				475E5DFE1F99A7F500CF82E0 /* BusChecker.xcdatamodeld */,
 			);
 			path = BusChecker;
 			sourceTree = "<group>";
@@ -126,6 +130,24 @@
 				475E5E1C1F99A7F600CF82E0 /* Info.plist */,
 			);
 			path = BusCheckerUITests;
+			sourceTree = "<group>";
+		};
+		475E5E281F99B30900CF82E0 /* FirstView */ = {
+			isa = PBXGroup;
+			children = (
+				475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */,
+			);
+			path = FirstView;
+			sourceTree = "<group>";
+		};
+		475E5E2B1F99C1F300CF82E0 /* CoreData */ = {
+			isa = PBXGroup;
+			children = (
+				475E5DFE1F99A7F500CF82E0 /* BusChecker.xcdatamodeld */,
+				475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */,
+				475E5E2E1F99D14000CF82E0 /* MessageMO.swift */,
+			);
+			path = CoreData;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -262,8 +284,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				475E5DFA1F99A7F500CF82E0 /* ViewController.swift in Sources */,
+				475E5E2A1F99B34C00CF82E0 /* BusStopUITableViewController.swift in Sources */,
+				475E5E2F1F99D14000CF82E0 /* MessageMO.swift in Sources */,
 				475E5E001F99A7F500CF82E0 /* BusChecker.xcdatamodeld in Sources */,
+				475E5E2D1F99C23B00CF82E0 /* BusStopMO.swift in Sources */,
 				475E5DF81F99A7F500CF82E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -433,6 +457,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QXWBHRRVR3;
 				INFOPLIST_FILE = BusChecker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kenth.BusChecker;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -448,6 +473,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QXWBHRRVR3;
 				INFOPLIST_FILE = BusChecker/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = kenth.BusChecker;
 				PRODUCT_NAME = "$(TARGET_NAME)";

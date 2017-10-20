@@ -7,3 +7,18 @@
 //
 
 import Foundation
+import CoreData
+
+class BusStopMO : NSManagedObject {
+    
+    class func CreateBusStopMO(stopCode : Int16,bookmarkName: String,busNumber: String, creation: Date, in context: NSManagedObjectContext) -> BusStopMO
+    {
+    
+        let busstop = BusStopMO(context: context)
+        busstop.stopCode = stopCode
+        busstop.bookmarkName = bookmarkName
+        busstop.busNumber = busNumber
+        busstop.creationDate = creation
+        return busstop
+    }
+}
