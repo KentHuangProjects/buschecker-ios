@@ -6,34 +6,42 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13173"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Bus Stops-->
+        <!--Bus Routes-->
         <scene sceneID="8eq-Km-EZB">
             <objects>
-                <tableViewController id="zch-b8-ugs" sceneMemberID="viewController">
+                <tableViewController id="zch-b8-ugs" customClass="BusStopUITableViewController" customModule="BusChecker" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" id="hOW-DA-weg">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <prototypes>
-                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" textLabel="Z3d-qy-z6G" style="IBUITableViewCellStyleDefault" id="7ep-Ha-Rja">
-                                <rect key="frame" x="0.0" y="28" width="375" height="44"/>
+                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="BusStopItemCollectionViewCell" rowHeight="60" id="7ep-Ha-Rja" customClass="BusStopItemCollectionViewCell" customModule="BusChecker" customModuleProvider="target">
+                                <rect key="frame" x="0.0" y="28" width="375" height="60"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="7ep-Ha-Rja" id="6b2-QV-6fd">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="43.5"/>
+                                    <rect key="frame" x="0.0" y="0.0" width="342" height="59.5"/>
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
-                                        <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="Z3d-qy-z6G">
-                                            <rect key="frame" x="16" y="0.0" width="344" height="43.5"/>
-                                            <autoresizingMask key="autoresizingMask"/>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ErM-45-1FL">
+                                            <rect key="frame" x="19" y="19" width="42" height="21"/>
                                             <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                             <nil key="textColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
                                     </subviews>
+                                    <constraints>
+                                        <constraint firstItem="ErM-45-1FL" firstAttribute="centerY" secondItem="6b2-QV-6fd" secondAttribute="centerY" id="enL-PW-6fy"/>
+                                        <constraint firstItem="ErM-45-1FL" firstAttribute="leading" secondItem="6b2-QV-6fd" secondAttribute="leadingMargin" constant="11" id="j4h-4z-K1C"/>
+                                    </constraints>
                                 </tableViewCellContentView>
+                                <connections>
+                                    <outlet property="bookmarkName" destination="ErM-45-1FL" id="C25-jb-69D"/>
+                                </connections>
                             </tableViewCell>
                         </prototypes>
                         <connections>
@@ -41,11 +49,32 @@
                             <outlet property="delegate" destination="zch-b8-ugs" id="DKV-ox-J43"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Bus Stops" id="Psc-wv-c0t"/>
+                    <navigationItem key="navigationItem" title="Bus Routes" id="Psc-wv-c0t">
+                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="8NK-0X-x2e">
+                            <connections>
+                                <segue destination="c0C-Et-bJE" kind="show" id="MZz-s2-Fr6"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="O6u-fi-Oye" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-847" y="-318"/>
+            <point key="canvasLocation" x="-604" y="-532"/>
+        </scene>
+        <!--View Controller-->
+        <scene sceneID="5Zq-0T-mLr">
+            <objects>
+                <viewController id="c0C-Et-bJE" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="gBe-2R-CH9">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <viewLayoutGuide key="safeArea" id="36T-DT-3eK"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Bgm-I0-faF" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="415" y="-532"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="m5W-Om-D9X">

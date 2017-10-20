@@ -17,6 +17,7 @@
 		475E5E2A1F99B34C00CF82E0 /* BusStopUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */; };
 		475E5E2D1F99C23B00CF82E0 /* BusStopMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */; };
 		475E5E2F1F99D14000CF82E0 /* MessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E2E1F99D14000CF82E0 /* MessageMO.swift */; };
+		475E5E361F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E351F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -53,6 +54,7 @@
 		475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopUITableViewController.swift; sourceTree = "<group>"; };
 		475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopMO.swift; sourceTree = "<group>"; };
 		475E5E2E1F99D14000CF82E0 /* MessageMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMO.swift; sourceTree = "<group>"; };
+		475E5E351F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopItemCollectionViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -136,6 +138,7 @@
 			isa = PBXGroup;
 			children = (
 				475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */,
+				475E5E351F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift */,
 			);
 			path = FirstView;
 			sourceTree = "<group>";
@@ -284,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				475E5E361F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift in Sources */,
 				475E5E2A1F99B34C00CF82E0 /* BusStopUITableViewController.swift in Sources */,
 				475E5E2F1F99D14000CF82E0 /* MessageMO.swift in Sources */,
 				475E5E001F99A7F500CF82E0 /* BusChecker.xcdatamodeld in Sources */,

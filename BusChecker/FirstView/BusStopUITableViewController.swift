@@ -14,22 +14,6 @@ class BusStopUITableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        _ = BusStopMO.CreateBusStopMO(stopCode: 33333, bookmarkName: "here is bookmark", busNumber: "25", creation: Date(), in: context)
-        do {
-            try context.save()
-        } catch {
-            print(error)
-        }
-    }
-    
-    var context : NSManagedObjectContext
-    var container: NSPersistentContainer =
-        (UIApplication.shared.delegate as! AppDelegate).persistentContainer
-    
-    var fetchedResultsController: NSFetchedResultsController<BusStopMO>
-    
-    
-    required init?(coder aDecoder: NSCoder) {
         context  = container.viewContext
         let request: NSFetchRequest<BusStopMO> = BusStopMO.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(
@@ -44,12 +28,37 @@ class BusStopUITableViewController: UITableViewController{
         )
         fetchedResultsController.delegate = self
         do{
-        try fetchedResultsController.performFetch()
+            try fetchedResultsController.performFetch()
         } catch {
             print(error)
         }
         tableView.reloadData()
         
+//        _ = BusStopMO.CreateBusStopMO(stopCode: 33333, bookmarkName: "here is bookmark", busNumber: "25", creation: Date(), in: context)
+//        do {
+//            try context.save()
+//        } catch {
+//            print(error)
+//        }
+    }
+    
+    var context : NSManagedObjectContext!
+    var container: NSPersistentContainer =
+        (UIApplication.shared.delegate as! AppDelegate).persistentContainer
+    
+    var fetchedResultsController: NSFetchedResultsController<BusStopMO>!
+    
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BusStopItemCollectionViewCell", for: indexPath) as? BusStopItemCollectionViewCell else {
+            fatalError("The dequeued cell is not an instance of BusStopItemCollectionViewCell.")
+        }
+        let busstop = fetchedResultsController.object(at: indexPath)
+        cell.bookmarkName.text = busstop.bookmarkName
+        
+        
+        
+        return cell
     }
     
 
@@ -62,7 +71,7 @@ extension BusStopUITableViewController {
     // MARK: UITableViewDataSource
     
     override func numberOfSections(in tableView: UITableView) -> Int {
-        return fetchedResultsController.sections?.count ?? 1
+        return  1
     }
     
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,13 +82,15 @@ extension BusStopUITableViewController {
         }
     }
     
-    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        if let sections = fetchedResultsController.sections, sections.count > 0 {
-            return sections[section].name
-        } else {
-            return nil
-        }
-    }
+
+    
+//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        if let sections = fetchedResultsController.sections, sections.count > 0 {
+//            return sections[section].name
+//        } else {
+//            return nil
+//        }
+//    }
 
 }
 

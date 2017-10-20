@@ -9,6 +9,6 @@
 import Foundation
 import CoreData
 
-class MEssageMO {
+class MessageMO : NSManagedObject {
     
 }
