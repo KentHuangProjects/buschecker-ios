@@ -61,10 +61,10 @@
             </objects>
             <point key="canvasLocation" x="-604" y="-532"/>
         </scene>
-        <!--View Controller-->
+        <!--Add View Controller-->
         <scene sceneID="5Zq-0T-mLr">
             <objects>
-                <viewController id="c0C-Et-bJE" sceneMemberID="viewController">
+                <viewController id="c0C-Et-bJE" customClass="AddViewController" customModule="BusChecker" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="gBe-2R-CH9">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
