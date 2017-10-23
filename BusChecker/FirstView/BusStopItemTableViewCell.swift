@@ -8,7 +8,7 @@
 
 import UIKit
 
-class BusStopItemCollectionViewCell: UITableViewCell {
+class BusStopItemTableViewCell: UITableViewCell {
     
     
     @IBOutlet weak var bookmarkName: UILabel!

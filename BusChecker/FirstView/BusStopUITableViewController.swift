@@ -17,10 +17,10 @@ class BusStopUITableViewController: UITableViewController{
         //set up the logn-press context menu
         
         //delete menuitem
-        let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(BusStopItemCollectionViewCell.deleteRoute(_:)))
+        let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(BusStopItemTableViewCell.deleteRoute(_:)))
         
         //delete menuitem
-        let moveTopMenuItem = UIMenuItem(title: "Move To Top", action: #selector(BusStopItemCollectionViewCell.moveTopRoute(_:)))
+        let moveTopMenuItem = UIMenuItem(title: "Move To Top", action: #selector(BusStopItemTableViewCell.moveTopRoute(_:)))
         
         
         let menuController = UIMenuController.shared
@@ -50,13 +50,6 @@ class BusStopUITableViewController: UITableViewController{
             print(error)
         }
         tableView.reloadData()
-        
-//        _ = BusStopMO.CreateBusStopMO(stopCode: 33333, bookmarkName: "here is bookmark", busNumber: "25", creation: Date(), in: context)
-//        do {
-//            try context.save()
-//        } catch {
-//            print(error)
-//        }
     }
     
     var context: NSManagedObjectContext!
@@ -67,8 +60,8 @@ class BusStopUITableViewController: UITableViewController{
     
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BusStopItemCollectionViewCell", for: indexPath) as? BusStopItemCollectionViewCell else {
-            fatalError("The dequeued cell is not an instance of BusStopItemCollectionViewCell.")
+        guard let cell = tableView.dequeueReusableCell(withIdentifier: "BusStopItemTableViewCell", for: indexPath) as? BusStopItemTableViewCell else {
+            fatalError("The dequeued cell is not an instance of BusStopItemTableViewCell.")
         }
         let busstop = fetchedResultsController.object(at: indexPath)
         cell.bookmarkName.text = busstop.bookmarkName
@@ -97,6 +90,28 @@ extension BusStopUITableViewController {
         }
     }
     
+    // method to run when table view cell is tapped
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        // Segue to the second view controller
+        self.performSegue(withIdentifier: "ToMessage", sender: self)
+    }
+    
+    // This function is called before the segue
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        if(segue.identifier == "ToMessage") {
+        
+            // get a reference to the second view controller
+            let secondViewController = segue.destination as! MessageTableViewController
+            
+            let selectedIndexPath = self.tableView.indexPathForSelectedRow!
+            let selectedbusstop = fetchedResultsController.object(at: selectedIndexPath)
+            // set a variable in the second view controller with the data to pass
+            secondViewController.bustop = selectedbusstop
+        }
+    }
+    
     //long-press menu
     override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
         return true
@@ -104,8 +119,8 @@ extension BusStopUITableViewController {
     
     //long-press menu
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
-        return action == #selector(BusStopItemCollectionViewCell.deleteRoute(_:))
-            || action == #selector(BusStopItemCollectionViewCell.moveTopRoute(_:))
+        return action == #selector(BusStopItemTableViewCell.deleteRoute(_:))
+            || action == #selector(BusStopItemTableViewCell.moveTopRoute(_:))
         
     }
     

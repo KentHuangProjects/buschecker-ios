@@ -19,7 +19,9 @@
 		475E5E2A1F99B34C00CF82E0 /* BusStopUITableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */; };
 		475E5E2D1F99C23B00CF82E0 /* BusStopMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */; };
 		475E5E2F1F99D14000CF82E0 /* MessageMO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E2E1F99D14000CF82E0 /* MessageMO.swift */; };
-		475E5E361F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E351F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift */; };
+		475E5E361F99E43900CF82E0 /* BusStopItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5E351F99E43900CF82E0 /* BusStopItemTableViewCell.swift */; };
+		47F56FE11F9DDCF20074179A /* MessageTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56FE01F9DDCF20074179A /* MessageTableViewController.swift */; };
+		47F56FE31F9DE23C0074179A /* MessageItemTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 47F56FE21F9DE23C0074179A /* MessageItemTableViewCell.swift */; };
 		E965A70C1F9A81240068C025 /* AddViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = E965A70B1F9A81240068C025 /* AddViewController.swift */; };
 		E965A70E1F9A83EA0068C025 /* BusStopViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = E965A70D1F9A83EA0068C025 /* BusStopViewModel.swift */; };
 		F96CCEF3EF9AE6E8C6E21C03 /* Pods_BusCheckerTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = DB7753ADF82165C7D560A1B8 /* Pods_BusCheckerTests.framework */; };
@@ -63,7 +65,9 @@
 		475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopUITableViewController.swift; sourceTree = "<group>"; };
 		475E5E2C1F99C23B00CF82E0 /* BusStopMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopMO.swift; sourceTree = "<group>"; };
 		475E5E2E1F99D14000CF82E0 /* MessageMO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageMO.swift; sourceTree = "<group>"; };
-		475E5E351F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopItemCollectionViewCell.swift; sourceTree = "<group>"; };
+		475E5E351F99E43900CF82E0 /* BusStopItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BusStopItemTableViewCell.swift; sourceTree = "<group>"; };
+		47F56FE01F9DDCF20074179A /* MessageTableViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageTableViewController.swift; sourceTree = "<group>"; };
+		47F56FE21F9DE23C0074179A /* MessageItemTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MessageItemTableViewCell.swift; sourceTree = "<group>"; };
 		95803B426CE8F07BCD8FA791 /* Pods_BusCheckerUITests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_BusCheckerUITests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		9E490F9ACA53B9683862E34D /* Pods-BusCheckerUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusCheckerUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusCheckerUITests/Pods-BusCheckerUITests.release.xcconfig"; sourceTree = "<group>"; };
 		D8C8C4268AF4B0E4B678121E /* Pods-BusCheckerTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusCheckerTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusCheckerTests/Pods-BusCheckerTests.release.xcconfig"; sourceTree = "<group>"; };
@@ -126,9 +130,10 @@
 		475E5DF61F99A7F500CF82E0 /* BusChecker */ = {
 			isa = PBXGroup;
 			children = (
+				475E5E281F99B30900CF82E0 /* FirstView */,
+				47F56FDF1F9DDCA00074179A /* SecondView */,
 				E965A70A1F9A80220068C025 /* AddView */,
 				475E5E2B1F99C1F300CF82E0 /* CoreData */,
-				475E5E281F99B30900CF82E0 /* FirstView */,
 				475E5DF71F99A7F500CF82E0 /* AppDelegate.swift */,
 				475E5DFB1F99A7F500CF82E0 /* Main.storyboard */,
 				475E5E011F99A7F500CF82E0 /* Assets.xcassets */,
@@ -160,7 +165,7 @@
 			isa = PBXGroup;
 			children = (
 				475E5E291F99B34C00CF82E0 /* BusStopUITableViewController.swift */,
-				475E5E351F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift */,
+				475E5E351F99E43900CF82E0 /* BusStopItemTableViewCell.swift */,
 			);
 			path = FirstView;
 			sourceTree = "<group>";
@@ -173,6 +178,15 @@
 				475E5E2E1F99D14000CF82E0 /* MessageMO.swift */,
 			);
 			path = CoreData;
+			sourceTree = "<group>";
+		};
+		47F56FDF1F9DDCA00074179A /* SecondView */ = {
+			isa = PBXGroup;
+			children = (
+				47F56FE01F9DDCF20074179A /* MessageTableViewController.swift */,
+				47F56FE21F9DE23C0074179A /* MessageItemTableViewCell.swift */,
+			);
+			path = SecondView;
 			sourceTree = "<group>";
 		};
 		4BA5427E7DD5210987035A1D /* Pods */ = {
@@ -500,13 +514,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				475E5E361F99E43900CF82E0 /* BusStopItemCollectionViewCell.swift in Sources */,
+				475E5E361F99E43900CF82E0 /* BusStopItemTableViewCell.swift in Sources */,
 				475E5E2A1F99B34C00CF82E0 /* BusStopUITableViewController.swift in Sources */,
 				E965A70C1F9A81240068C025 /* AddViewController.swift in Sources */,
 				475E5E2F1F99D14000CF82E0 /* MessageMO.swift in Sources */,
 				475E5E001F99A7F500CF82E0 /* BusChecker.xcdatamodeld in Sources */,
 				E965A70E1F9A83EA0068C025 /* BusStopViewModel.swift in Sources */,
 				475E5E2D1F99C23B00CF82E0 /* BusStopMO.swift in Sources */,
+				47F56FE11F9DDCF20074179A /* MessageTableViewController.swift in Sources */,
+				47F56FE31F9DE23C0074179A /* MessageItemTableViewCell.swift in Sources */,
 				475E5DF81F99A7F500CF82E0 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
