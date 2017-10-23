@@ -20,11 +20,13 @@ class BusStopItemCollectionViewCell: UITableViewCell {
         let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
         print("BusStopItemCollectionViewCell,Delete")
         BusStopMO.DeleteBusStopMO(bsVm: bsVM,context: context)
-        do {
-            try context.save()
-        } catch {
-            print(error)
-            fatalError("fail to delete.")
-        }
+    }
+    
+    
+    //move to top method
+    @objc func moveTopRoute(_ sender:AnyObject?){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        print("BusStopItemCollectionViewCell,moveTopRoute")
+        BusStopMO.UpdateDateBusStopMO(bsVm: bsVM,context: context)
     }
 }

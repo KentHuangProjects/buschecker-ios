@@ -19,9 +19,14 @@ class BusStopUITableViewController: UITableViewController{
         //delete menuitem
         let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(BusStopItemCollectionViewCell.deleteRoute(_:)))
         
+        //delete menuitem
+        let moveTopMenuItem = UIMenuItem(title: "Move To Top", action: #selector(BusStopItemCollectionViewCell.moveTopRoute(_:)))
+        
+        
         let menuController = UIMenuController.shared
         var newItems = menuController.menuItems ?? [UIMenuItem]()
         newItems.append(deleteMenuItem)
+        newItems.append(moveTopMenuItem)
         menuController.menuItems = newItems
         
         
@@ -30,7 +35,7 @@ class BusStopUITableViewController: UITableViewController{
         let request: NSFetchRequest<BusStopMO> = BusStopMO.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(
             key: "creationDate",
-            ascending: true
+            ascending: false
             )]
         fetchedResultsController = NSFetchedResultsController<BusStopMO>(
             fetchRequest: request,
@@ -100,6 +105,8 @@ extension BusStopUITableViewController {
     //long-press menu
     override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
         return action == #selector(BusStopItemCollectionViewCell.deleteRoute(_:))
+            || action == #selector(BusStopItemCollectionViewCell.moveTopRoute(_:))
+        
     }
     
     //long-press menu
