@@ -21,4 +21,14 @@ class BusStopMO : NSManagedObject {
         busstop.creationDate = creation
         return busstop
     }
+    
+    class func DeleteBusStopMO(bsVm: BusStopViewModel,context: NSManagedObjectContext) {
+        let busnum = bsVm.busnumberVm
+        let stopcode = Int64(bsVm.stopcodeVm!)
+        
+        let fetchRequest: NSFetchRequest<BusStopMO> = BusStopMO.fetchRequest()
+        fetchRequest.predicate = NSPredicate.init(format: "busNumber = %@ AND stopCode = %@", argumentArray: [busnum!,stopcode!])
+        let object = try! context.fetch(fetchRequest)
+        context.delete(object[0])
+    }
 }

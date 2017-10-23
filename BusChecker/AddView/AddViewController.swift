@@ -22,18 +22,18 @@ class AddViewController: FormViewController {
     }
 
     @IBAction func SaveRoute(_ sender: UIBarButtonItem) {
-        _ = BusStopMO.CreateBusStopMO(stopCode: Int64(viewModel.stopcodeVm), bookmarkName: viewModel.bookmarknameVm, busNumber: viewModel.busnumberVm, creation: Date(), in: context)
+        //TODO validation
+        _ = BusStopMO.CreateBusStopMO(stopCode: Int64(viewModel.stopcodeVm!)!, bookmarkName: viewModel.bookmarknameVm!, busNumber: viewModel.busnumberVm!, creation: Date(), in: context)
         do {
             try context.save()
         } catch {
             print(error)
         }
+        dismiss(animated: true, completion: nil)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        context  = container.viewContext
-        
         form
             +++ Section()    //2
             <<< TextRow() { // 3

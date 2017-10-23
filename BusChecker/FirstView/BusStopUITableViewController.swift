@@ -14,6 +14,18 @@ class BusStopUITableViewController: UITableViewController{
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set up the logn-press context menu
+        
+        //delete menuitem
+        let deleteMenuItem = UIMenuItem(title: "Delete", action: #selector(BusStopItemCollectionViewCell.deleteRoute(_:)))
+        
+        let menuController = UIMenuController.shared
+        var newItems = menuController.menuItems ?? [UIMenuItem]()
+        newItems.append(deleteMenuItem)
+        menuController.menuItems = newItems
+        
+        
+        //set up the NSFetchRequest for the tableView
         context  = container.viewContext
         let request: NSFetchRequest<BusStopMO> = BusStopMO.fetchRequest()
         request.sortDescriptors = [NSSortDescriptor(
@@ -42,7 +54,7 @@ class BusStopUITableViewController: UITableViewController{
 //        }
     }
     
-    var context : NSManagedObjectContext!
+    var context: NSManagedObjectContext!
     var container: NSPersistentContainer =
         (UIApplication.shared.delegate as! AppDelegate).persistentContainer
     
@@ -55,9 +67,7 @@ class BusStopUITableViewController: UITableViewController{
         }
         let busstop = fetchedResultsController.object(at: indexPath)
         cell.bookmarkName.text = busstop.bookmarkName
-        
-        
-        
+        cell.bsVM = BusStopViewModel(busstop.busNumber!,String(busstop.stopCode),busstop.bookmarkName!)
         return cell
     }
     
@@ -82,15 +92,27 @@ extension BusStopUITableViewController {
         }
     }
     
+    //long-press menu
+    override func tableView(_ tableView: UITableView, shouldShowMenuForRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    //long-press menu
+    override func tableView(_ tableView: UITableView, canPerformAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) -> Bool {
+        return action == #selector(BusStopItemCollectionViewCell.deleteRoute(_:))
+    }
+    
+    //long-press menu
+    override func tableView(_ tableView: UITableView, performAction action: Selector, forRowAt indexPath: IndexPath, withSender sender: Any?) {
+        //You can handle standard actions here, but custom actions never trigger this. It still needs to be present for the menu to display, though.
+    }
+    
 
     
-//    override func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-//        if let sections = fetchedResultsController.sections, sections.count > 0 {
-//            return sections[section].name
-//        } else {
-//            return nil
-//        }
-//    }
+    
+
+    
+
 
 }
 

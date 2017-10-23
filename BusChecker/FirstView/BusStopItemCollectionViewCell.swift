@@ -12,4 +12,19 @@ class BusStopItemCollectionViewCell: UITableViewCell {
     
     
     @IBOutlet weak var bookmarkName: UILabel!
+    
+    var bsVM: BusStopViewModel!
+    
+    //delete method
+    @objc func deleteRoute(_ sender:AnyObject?){
+        let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
+        print("BusStopItemCollectionViewCell,Delete")
+        BusStopMO.DeleteBusStopMO(bsVm: bsVM,context: context)
+        do {
+            try context.save()
+        } catch {
+            print(error)
+            fatalError("fail to delete.")
+        }
+    }
 }

@@ -12,4 +12,11 @@ class BusStopViewModel {
     var busnumberVm : String?
     var stopcodeVm : String?
     var bookmarknameVm : String?
+    
+    convenience init(_ busnumberVm: String, _ stopcodeVm: String, _ bookmarknameVm: String) {
+        self.init()
+        self.busnumberVm = busnumberVm
+        self.stopcodeVm = stopcodeVm
+        self.bookmarknameVm = bookmarknameVm
+    }
 }
