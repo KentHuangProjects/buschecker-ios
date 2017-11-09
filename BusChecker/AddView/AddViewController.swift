@@ -23,7 +23,7 @@ class AddViewController: FormViewController {
 
     @IBAction func SaveRoute(_ sender: UIBarButtonItem) {
         //TODO validation
-        _ = BusStopMO.CreateBusStopMO(stopCode: Int64(viewModel.stopcodeVm!)!, bookmarkName: viewModel.bookmarknameVm!, busNumber: viewModel.busnumberVm!, creation: Date(), in: context)
+        _ = BusStopMO.CreateBusStopMO(stopCode: viewModel.stopcodeVm!, bookmarkName: viewModel.bookmarknameVm!, busNumber: viewModel.busnumberVm!, creation: Date(), in: context)
         do {
             try context.save()
         } catch {

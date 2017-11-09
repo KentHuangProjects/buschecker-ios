@@ -4,9 +4,11 @@
 target 'BusChecker' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
-  pod 'Eureka', '~> 4.0'
 
   # Pods for BusChecker
+  pod 'Eureka', '~> 4.0'
+  pod 'Alamofire', '~> 4.5'
+
 
   target 'BusCheckerTests' do
     inherit! :search_paths

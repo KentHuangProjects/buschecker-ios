@@ -11,7 +11,7 @@ import CoreData
 
 class BusStopMO : NSManagedObject {
     
-    class func CreateBusStopMO(stopCode : Int64,bookmarkName: String,busNumber: String, creation: Date, in context: NSManagedObjectContext) -> BusStopMO
+    class func CreateBusStopMO(stopCode : String,bookmarkName: String,busNumber: String, creation: Date, in context: NSManagedObjectContext) -> BusStopMO
     {
     
         let busstop = BusStopMO(context: context)
@@ -24,10 +24,10 @@ class BusStopMO : NSManagedObject {
     
     class func DeleteBusStopMO(bsVm: BusStopViewModel,context: NSManagedObjectContext) {
         let busnum = bsVm.busnumberVm
-        let stopcode = Int64(bsVm.stopcodeVm!)
+        let stopcode = bsVm.stopcodeVm!
         
         let fetchRequest: NSFetchRequest<BusStopMO> = BusStopMO.fetchRequest()
-        fetchRequest.predicate = NSPredicate.init(format: "busNumber = %@ AND stopCode = %@", argumentArray: [busnum!,stopcode!])
+        fetchRequest.predicate = NSPredicate.init(format: "busNumber = %@ AND stopCode = %@", argumentArray: [busnum!,stopcode])
         let object = try! context.fetch(fetchRequest)
         context.delete(object[0])
         do {
@@ -41,10 +41,10 @@ class BusStopMO : NSManagedObject {
     //update date
     class func UpdateDateBusStopMO(bsVm: BusStopViewModel,context: NSManagedObjectContext) {
         let busnum = bsVm.busnumberVm
-        let stopcode = Int64(bsVm.stopcodeVm!)
+        let stopcode = bsVm.stopcodeVm!
         
         let fetchRequest: NSFetchRequest<BusStopMO> = BusStopMO.fetchRequest()
-        fetchRequest.predicate = NSPredicate.init(format: "busNumber = %@ AND stopCode = %@", argumentArray: [busnum!,stopcode!])
+        fetchRequest.predicate = NSPredicate.init(format: "busNumber = %@ AND stopCode = %@", argumentArray: [busnum!,stopcode])
         let object = try! context.fetch(fetchRequest)[0]
         object.setValue(Date(), forKey: "creationDate")
         

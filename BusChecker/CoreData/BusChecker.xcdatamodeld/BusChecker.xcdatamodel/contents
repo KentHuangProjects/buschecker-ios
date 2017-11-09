@@ -4,16 +4,17 @@
         <attribute name="bookmarkName" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="busNumber" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
-        <attribute name="stopCode" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="stopCode" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="messages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Message" inverseName="busStop" inverseEntity="Message" syncable="YES"/>
     </entity>
     <entity name="Message" representedClassName=".MessageMO" syncable="YES" codeGenerationType="category">
         <attribute name="creationDate" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <attribute name="m1" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="busStop" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="BusStop" inverseName="messages" inverseEntity="BusStop" syncable="YES"/>
     </entity>
     <elements>
-        <element name="BusStop" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Message" positionX="286" positionY="18" width="128" height="88"/>
+        <element name="BusStop" positionX="-63" positionY="-18" width="128" height="120"/>
+        <element name="Message" positionX="286" positionY="18" width="128" height="105"/>
     </elements>
 </model>

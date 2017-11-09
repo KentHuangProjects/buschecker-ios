@@ -65,7 +65,7 @@ class BusStopUITableViewController: UITableViewController{
         }
         let busstop = fetchedResultsController.object(at: indexPath)
         cell.bookmarkName.text = busstop.bookmarkName
-        cell.bsVM = BusStopViewModel(busstop.busNumber!,String(busstop.stopCode),busstop.bookmarkName!)
+        cell.bsVM = BusStopViewModel(busstop.busNumber!,busstop.stopCode!,busstop.bookmarkName!)
         return cell
     }
     
@@ -106,7 +106,10 @@ extension BusStopUITableViewController {
             let secondViewController = segue.destination as! MessageTableViewController
             
             let selectedIndexPath = self.tableView.indexPathForSelectedRow!
+            
+            //get the tapped BusStopMO object (has all the info for the tapped row)
             let selectedbusstop = fetchedResultsController.object(at: selectedIndexPath)
+            
             // set a variable in the second view controller with the data to pass
             secondViewController.bustop = selectedbusstop
         }
