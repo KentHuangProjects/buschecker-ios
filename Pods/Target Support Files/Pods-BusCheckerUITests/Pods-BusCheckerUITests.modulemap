@@ -1,0 +1,6 @@
+framework module Pods_BusCheckerUITests {
+  umbrella header "Pods-BusCheckerUITests-umbrella.h"
+
+  export *
+  module * { export * }
+}
