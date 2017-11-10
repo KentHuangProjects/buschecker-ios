@@ -207,11 +207,12 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                             
                             var index = 0
                             for schedule  in schedulesArray {
-                                let min = schedule["ExpectedCountdown"] as? String ?? " "
+                                let min = String(schedule["ExpectedCountdown"] as! Int)
                                 let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? " "
                                 
-                                timeMessage.insert("in \(min)    \(expectedLeaveTime)", at: index)
-                                index += 1
+                                timeMessage.insert("in \(min)min    \(expectedLeaveTime)", at: index)
+                                index = index +  1
+                                print(index)
                                 
 //                                timeMessage.append((min: min, expectedLeaveTime: expectedLeaveTime))
                                 print("got messages")

@@ -17,6 +17,8 @@ class MessageMO : NSManagedObject {
         
         let message = MessageMO(context: context)
         message.m1 = m1
+        message.m2 = m2
+        message.m3 = m3
         message.messageType = messageType
         message.title1 = title1
         message.title2 = title2
