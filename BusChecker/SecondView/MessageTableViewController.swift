@@ -75,7 +75,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             key: "creationDate",
             ascending: false
             )]
-        request.predicate = NSPredicate.init(format:"ANY busStop.busNumber== %@ ", argumentArray: [bustop])
+        request.predicate = NSPredicate.init(format:"busStop == %@ ", argumentArray: [bustop])
         fetchedResultsController = NSFetchedResultsController<MessageMO>(
             fetchRequest: request,
             managedObjectContext: context,
@@ -171,6 +171,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 self?.loadingalert.dismiss(animated: true, completion: nil)
             }
             
+            //make sure it
             let when1 = DispatchTime.now() + 2
             DispatchQueue.main.asyncAfter(deadline: when1){
                 // your code with delay
@@ -184,8 +185,51 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             case .success:
                 //Success
                 if response.response?.statusCode == 200 {
-                    print("Success with JSON: \(String(describing: response.result.value))")
+                    print("Success with JSON: \( response.result.value!)")
                     
+                    
+                
+                var destination = String()
+                
+                typealias timm = (min : String, expectedLeaveTime: String)
+                var timeMessage : [timm] = [timm]()
+                
+                if let responsejs = response.result.value! as? [[String:Any]] {
+                        let datajs = responsejs[0]
+                    
+                    
+                        if let schedulesArray = datajs["Schedules"] as? [[String:Any]] {
+                            
+                            destination = schedulesArray[0]["Destination"] as? String ?? "error"
+                            
+                            print("got destination")
+                            
+                            for schedule  in schedulesArray {
+                                let min = schedule["ExpectedCountdown"] as? String ?? "error"
+                                let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? "error"
+                                
+                                timeMessage.append((min: min, expectedLeaveTime: expectedLeaveTime))
+                                print("got messages")
+                            }
+                        }
+                    }
+                    
+                    let ntime = Date()
+                    let dFormatter = DateFormatter()
+                    dFormatter.dateFormat = "hh:mm a yyyy-MM-dd"
+                    
+                    let tstr = dFormatter.string(from: ntime)
+                    let businfotitle = "\((self?.stopcodeADD)!)[#\((self?.routenumADD)!)] To: \(destination)"
+                    //insert a message into coredata
+                    _ = MessageMO.CreateMessageMO(m1: "hello", messageType: "success", title1: tstr, title2: businfotitle, creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
+                    )
+                    do {
+                        print("save")
+                        try self?.context.save()
+                        
+                    } catch {
+                        print(error)
+                    }
                 }
                     //other errors
                     //Alamofire treats sent requests to be successful
@@ -219,7 +263,8 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             fatalError("The dequeued cell is not an instance of MessageItemTableViewCell.")
         }
         let message = fetchedResultsController.object(at: indexPath)
-
+        cell.dateTitle.text = message.title1
+        cell.businfoLabel.text = message.title2
         return cell
     }
 

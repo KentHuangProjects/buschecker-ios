@@ -10,8 +10,14 @@ import UIKit
 
 class MessageItemTableViewCell: UITableViewCell {
 
-    @IBOutlet weak var DateTitle: UILabel!
+    @IBOutlet weak var dateTitle: UILabel!
     
+    @IBOutlet weak var businfoLabel: UILabel!
+    
+    
+    var messageO: MessageMO! 
+    
+    @IBOutlet weak var messageTextfield: UITextView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
