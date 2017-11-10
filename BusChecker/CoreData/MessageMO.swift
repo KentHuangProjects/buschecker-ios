@@ -12,7 +12,7 @@ import CoreData
 
 class MessageMO : NSManagedObject {
     
-    class func CreateMessageMO(m1 : String,messageType: String,title1: String,title2: String, creation: Date,busstop:BusStopMO, in context: NSManagedObjectContext) -> MessageMO
+    class func CreateMessageMO(m1 : String,m2 : String, m3 : String, messageType: String,title1: String,title2: String, creation: Date,busstop:BusStopMO, in context: NSManagedObjectContext) -> MessageMO
     {
         
         let message = MessageMO(context: context)

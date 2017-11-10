@@ -191,8 +191,9 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 
                 var destination = String()
                 
-                typealias timm = (min : String, expectedLeaveTime: String)
-                var timeMessage : [timm] = [timm]()
+//                typealias timm = (min : String, expectedLeaveTime: String)
+//                var timeMessage : [timm] = [timm]()
+                    var timeMessage = [String](repeating: " ", count: 3)
                 
                 if let responsejs = response.result.value! as? [[String:Any]] {
                         let datajs = responsejs[0]
@@ -204,11 +205,15 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                             
                             print("got destination")
                             
+                            var index = 0
                             for schedule  in schedulesArray {
-                                let min = schedule["ExpectedCountdown"] as? String ?? "error"
-                                let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? "error"
+                                let min = schedule["ExpectedCountdown"] as? String ?? " "
+                                let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? " "
                                 
-                                timeMessage.append((min: min, expectedLeaveTime: expectedLeaveTime))
+                                timeMessage.insert("in \(min)    \(expectedLeaveTime)", at: index)
+                                index += 1
+                                
+//                                timeMessage.append((min: min, expectedLeaveTime: expectedLeaveTime))
                                 print("got messages")
                             }
                         }
@@ -221,7 +226,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     let tstr = dFormatter.string(from: ntime)
                     let businfotitle = "\((self?.stopcodeADD)!)[#\((self?.routenumADD)!)] To: \(destination)"
                     //insert a message into coredata
-                    _ = MessageMO.CreateMessageMO(m1: "hello", messageType: "success", title1: tstr, title2: businfotitle, creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
+                    _ = MessageMO.CreateMessageMO(m1: timeMessage[0],m2:timeMessage[1],m3:timeMessage[2], messageType: "success", title1: tstr, title2: businfotitle, creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
                     )
                     do {
                         print("save")
@@ -265,6 +270,10 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         let message = fetchedResultsController.object(at: indexPath)
         cell.dateTitle.text = message.title1
         cell.businfoLabel.text = message.title2
+        cell.m1.text = message.m1
+        cell.m2.text = message.m2
+        cell.m3.text = message.m3
+        
         return cell
     }
 
