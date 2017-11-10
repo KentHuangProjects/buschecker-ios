@@ -21,6 +21,11 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     
     @IBOutlet weak var viewTitle: UINavigationItem!
     
+    //when clear is tapped
+    @IBAction func clearTap(_ sender: UIBarButtonItem) {
+        MessageMO.DeleteAllMessageMO(busstop: bustop, context: context)
+    }
+    
     weak var bustop: BusStopMO! {
         didSet {
             viewTitle.title = self.bustop.bookmarkName
@@ -168,7 +173,9 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             let when = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: when){
                 // your code with delay
-                self?.loadingalert.dismiss(animated: true, completion: nil)
+                if let alertbool = self?.loadingalert.isBeingDismissed, !alertbool{
+                    self?.loadingalert.dismiss(animated: true, completion: nil)
+                }
             }
             
             //make sure it

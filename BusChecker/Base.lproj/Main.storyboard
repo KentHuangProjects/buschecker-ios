@@ -154,7 +154,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Title" id="dyN-yp-RFC">
-                        <barButtonItem key="rightBarButtonItem" title="Clear" id="Jt8-ZW-Wxa"/>
+                        <barButtonItem key="rightBarButtonItem" title="Clear" id="Jt8-ZW-Wxa">
+                            <connections>
+                                <action selector="clearTap:" destination="iiO-FW-g7W" id="0XR-AN-QxA"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <connections>
                         <outlet property="viewTitle" destination="dyN-yp-RFC" id="jxU-8W-aJC"/>

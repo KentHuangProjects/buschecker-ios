@@ -28,4 +28,20 @@ class MessageMO : NSManagedObject {
         return message
     }
     
+    class func DeleteAllMessageMO(busstop: BusStopMO,context: NSManagedObjectContext) {
+        
+        let fetchRequest: NSFetchRequest<MessageMO> = MessageMO.fetchRequest()
+        fetchRequest.predicate = NSPredicate.init(format: "busStop = %@", argumentArray: [busstop])
+        let objects = try! context.fetch(fetchRequest)
+        for object in objects {
+            context.delete(object)
+        }
+        do {
+            try context.save()
+        } catch {
+            print(error)
+            fatalError("fail to delete messages.")
+        }
+    }
+    
 }
