@@ -34,6 +34,8 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         }
     }
     
+     let refreshcontrol = UIRefreshControl()
+    
     //activity indicator
     var loadingIndicator = UIActivityIndicatorView(frame: CGRect(x: 10, y: 5, width: 50, height: 50))
     
@@ -48,7 +50,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         loadingIndicator.isHidden = false
     
         //loadingIndicator.center = CGPoint(x:tableView.bounds.width / 2.0, y:tableView.bounds.height / 2.0)
-        loadingIndicator.startAnimating()
+        //loadingIndicator.startAnimating()
         loadingalert?.view.addSubview(loadingIndicator)
         
         
@@ -57,7 +59,20 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
      var loadingalert: UIAlertController!
     
     
+        //pull down refresh func
+        @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+            
+            //starting refresh animation will start automatically when users pull
+            
+            //get the loading indicator running
 
+            //get a new  message
+            makeARequest()
+
+            print("refresh")
+
+            refreshControl.endRefreshing()
+        }
 
     
 
@@ -65,6 +80,10 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        
+       //set up pull refresh for table view
+        tableView.refreshControl = refreshcontrol
+        self.refreshcontrol.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
         
         createAndconfigureActivityIndicatorView()
         
