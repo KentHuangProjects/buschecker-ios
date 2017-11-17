@@ -12,11 +12,13 @@ import CoreData
 
 class MessageMO : NSManagedObject {
     
-    class func CreateMessageMO(m1 : String,messageType: String,title1: String,title2: String, creation: Date,busstop:BusStopMO, in context: NSManagedObjectContext) -> MessageMO
+    class func CreateMessageMO(m1 : String,m2 : String, m3 : String, messageType: String,title1: String,title2: String, creation: Date,busstop:BusStopMO, in context: NSManagedObjectContext) -> MessageMO
     {
         
         let message = MessageMO(context: context)
         message.m1 = m1
+        message.m2 = m2
+        message.m3 = m3
         message.messageType = messageType
         message.title1 = title1
         message.title2 = title2
@@ -24,6 +26,22 @@ class MessageMO : NSManagedObject {
         
         message.busStop = busstop
         return message
+    }
+    
+    class func DeleteAllMessageMO(busstop: BusStopMO,context: NSManagedObjectContext) {
+        
+        let fetchRequest: NSFetchRequest<MessageMO> = MessageMO.fetchRequest()
+        fetchRequest.predicate = NSPredicate.init(format: "busStop = %@", argumentArray: [busstop])
+        let objects = try! context.fetch(fetchRequest)
+        for object in objects {
+            context.delete(object)
+        }
+        do {
+            try context.save()
+        } catch {
+            print(error)
+            fatalError("fail to delete messages.")
+        }
     }
     
 }

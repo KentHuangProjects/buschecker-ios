@@ -21,6 +21,11 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     
     @IBOutlet weak var viewTitle: UINavigationItem!
     
+    //when clear is tapped
+    @IBAction func clearTap(_ sender: UIBarButtonItem) {
+        MessageMO.DeleteAllMessageMO(busstop: bustop, context: context)
+    }
+    
     weak var bustop: BusStopMO! {
         didSet {
             viewTitle.title = self.bustop.bookmarkName
@@ -168,7 +173,9 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             let when = DispatchTime.now() + 0.5
             DispatchQueue.main.asyncAfter(deadline: when){
                 // your code with delay
-                self?.loadingalert.dismiss(animated: true, completion: nil)
+                if let alertbool = self?.loadingalert.isBeingDismissed, !alertbool{
+                    self?.loadingalert.dismiss(animated: true, completion: nil)
+                }
             }
             
             //make sure it
@@ -191,8 +198,9 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 
                 var destination = String()
                 
-                typealias timm = (min : String, expectedLeaveTime: String)
-                var timeMessage : [timm] = [timm]()
+//                typealias timm = (min : String, expectedLeaveTime: String)
+//                var timeMessage : [timm] = [timm]()
+                    var timeMessage = [String](repeating: " ", count: 3)
                 
                 if let responsejs = response.result.value! as? [[String:Any]] {
                         let datajs = responsejs[0]
@@ -204,11 +212,16 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                             
                             print("got destination")
                             
+                            var index = 0
                             for schedule  in schedulesArray {
-                                let min = schedule["ExpectedCountdown"] as? String ?? "error"
-                                let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? "error"
+                                let min = String(schedule["ExpectedCountdown"] as! Int)
+                                let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? " "
                                 
-                                timeMessage.append((min: min, expectedLeaveTime: expectedLeaveTime))
+                                timeMessage.insert("in \(min)min    \(expectedLeaveTime)", at: index)
+                                index = index +  1
+                                print(index)
+                                
+//                                timeMessage.append((min: min, expectedLeaveTime: expectedLeaveTime))
                                 print("got messages")
                             }
                         }
@@ -221,7 +234,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     let tstr = dFormatter.string(from: ntime)
                     let businfotitle = "\((self?.stopcodeADD)!)[#\((self?.routenumADD)!)] To: \(destination)"
                     //insert a message into coredata
-                    _ = MessageMO.CreateMessageMO(m1: "hello", messageType: "success", title1: tstr, title2: businfotitle, creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
+                    _ = MessageMO.CreateMessageMO(m1: timeMessage[0],m2:timeMessage[1],m3:timeMessage[2], messageType: "success", title1: tstr, title2: businfotitle, creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
                     )
                     do {
                         print("save")
@@ -265,6 +278,10 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         let message = fetchedResultsController.object(at: indexPath)
         cell.dateTitle.text = message.title1
         cell.businfoLabel.text = message.title2
+        cell.m1.text = message.m1
+        cell.m2.text = message.m2
+        cell.m3.text = message.m3
+        
         return cell
     }
 
