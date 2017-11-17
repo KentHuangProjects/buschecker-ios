@@ -278,7 +278,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 if error._code == NSURLErrorTimedOut {
                     //HANDLE TIMEOUT HERE
                     errormessage = "Sorry. Internet not available."
-                    self?.errorAlert(errormessage: "Internet not available")
+                    //self?.errorAlert(errormessage: "Internet not available")
                 } else {
                     //other errors
                     errormessage = error.localizedDescription
@@ -295,7 +295,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 } catch {
                     print(error)
                 }
-                self?.errorAlert(errormessage: error.localizedDescription)
+                //self?.errorAlert(errormessage: error.localizedDescription)
                 
                 print("\n\nAuth request failed with error:\n \(error)")
             }
