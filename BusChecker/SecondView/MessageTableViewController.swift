@@ -71,7 +71,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
 
             print("refresh")
 
-            refreshControl.endRefreshing()
+            
         }
 
     
@@ -122,7 +122,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         
         print(thisBaseUrl)
         
-        //set up the sessionManager for sending http request(setting timeout to be 8 seconds)
+        //set up the sessionManager for sending http request(setting timeout to be 4 seconds)
         let configuration = URLSessionConfiguration.default
         //5 seconds time out if no respond gets back from the request
         configuration.timeoutIntervalForRequest = 4
@@ -211,6 +211,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             switch (response.result) {
             case .success:
                 //Success
+                self?.refreshControl?.endRefreshing()
                 if response.response?.statusCode == 200 {
                     print("Success with JSON: \( response.result.value!)")
                     
@@ -292,7 +293,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 }
                 
             case .failure(let error):
-                
+                self?.refreshControl?.endRefreshing()
                 let errormessage:String!
                 if error._code == NSURLErrorTimedOut {
                     //HANDLE TIMEOUT HERE
