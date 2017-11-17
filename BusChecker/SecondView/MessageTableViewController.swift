@@ -105,7 +105,8 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         
         //set up the sessionManager for sending http request(setting timeout to be 8 seconds)
         let configuration = URLSessionConfiguration.default
-        configuration.timeoutIntervalForRequest = 8
+        //5 seconds time out if no respond gets back from the request
+        configuration.timeoutIntervalForRequest = 4
         sessionManager = Alamofire.SessionManager(configuration: configuration)
         
         makeARequest()
@@ -131,10 +132,10 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     //stop code; set in the didset of the bustop object
     var stopcodeADD :String!
     
-    
+    var alertController:UIAlertController!
     func errorAlert(errormessage : String) {
-        let alertController = UIAlertController(title: "Error", message: errormessage, preferredStyle: .alert)
         
+        alertController = UIAlertController(title: "Error", message: errormessage, preferredStyle: .alert)
         let cancelAction = UIAlertAction(title: "Dismiss", style: .cancel)
         alertController.addAction(cancelAction)
         present(alertController, animated: true)
@@ -247,18 +248,54 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     //other errors
                     //Alamofire treats sent requests to be successful
                 else {
+                    var errormessage:String!
+                    
+                    if let responsejs = response.result.value, let datajs = responsejs as? [String: Any] , let message = datajs["Message"] as? String {
+                        errormessage = message
+                    } else {
+                        errormessage = "Fail to fetch data from the server."
+                    }
+                    
+                    let ntime = Date()
+                    //insert a message into coredata
+                    _ = MessageMO.CreateMessageMO(m1: errormessage,m2:"",m3:"", messageType: "fail", title1: "Error", title2: "", creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
+                    )
+                    do {
+                        print("save error in successerror")
+                        try self?.context.save()
+                        
+                    } catch {
+                        print(error)
+                    }
+                    
                     print("fail with JSON: \(String(describing: response.result.value))")
                     print("Response: \(String(describing: response.response))") // http url response
                 }
                 
             case .failure(let error):
+                
+                let errormessage:String!
                 if error._code == NSURLErrorTimedOut {
                     //HANDLE TIMEOUT HERE
+                    errormessage = "Sorry. Internet not available."
                     self?.errorAlert(errormessage: "Internet not available")
                 } else {
                     //other errors
-                    self?.errorAlert(errormessage: error.localizedDescription)
+                    errormessage = error.localizedDescription
+                    //self?.errorAlert(errormessage: error.localizedDescription)
                 }
+                let ntime = Date()
+                //insert a message into coredata
+                _ = MessageMO.CreateMessageMO(m1: errormessage,m2:"",m3:"", messageType: "fail", title1: "Error", title2: "", creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
+                )
+                do {
+                    print("save error in successerror")
+                    try self?.context.save()
+                    
+                } catch {
+                    print(error)
+                }
+                self?.errorAlert(errormessage: error.localizedDescription)
                 
                 print("\n\nAuth request failed with error:\n \(error)")
             }
@@ -272,17 +309,28 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     }
     
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageItemTableViewCell", for: indexPath) as? MessageItemTableViewCell else {
-            fatalError("The dequeued cell is not an instance of MessageItemTableViewCell.")
-        }
-        let message = fetchedResultsController.object(at: indexPath)
-        cell.dateTitle.text = message.title1
-        cell.businfoLabel.text = message.title2
-        cell.m1.text = message.m1
-        cell.m2.text = message.m2
-        cell.m3.text = message.m3
         
-        return cell
+        let message = fetchedResultsController.object(at: indexPath)
+        if(message.messageType == "success") {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "MessageItemTableViewCell", for: indexPath) as? MessageItemTableViewCell else {
+                fatalError("The dequeued cell is not an instance of MessageItemTableViewCell.")
+            }
+            cell.dateTitle.text = message.title1
+            cell.businfoLabel.text = message.title2
+            cell.m1.text = message.m1
+            cell.m2.text = message.m2
+            cell.m3.text = message.m3
+            
+            return cell
+        } else {
+            guard let cell = tableView.dequeueReusableCell(withIdentifier: "ErrorUITableViewCell", for: indexPath) as? ErrorUITableViewCell else {
+                fatalError("The dequeued cell is not an instance of MessageItemTableViewCell.")
+            }
+            cell.messageO = message
+            cell.textview.text = message.m1
+            return cell
+            
+        }
     }
 
 
