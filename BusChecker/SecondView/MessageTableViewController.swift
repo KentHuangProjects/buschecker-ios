@@ -128,9 +128,13 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         configuration.timeoutIntervalForRequest = 4
         sessionManager = Alamofire.SessionManager(configuration: configuration)
         
-        makeARequest()
+        
+        
+        self.tableView.separatorColor = UIColor.clear
         
         tableView.reloadData()
+        
+        makeARequest()
         
         
         
@@ -217,7 +221,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     
                     
                 
-                var destination = String()
+                //var destination = String()
                 
 //                typealias timm = (min : String, expectedLeaveTime: String)
 //                var timeMessage : [timm] = [timm]()
@@ -230,23 +234,28 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     
                         if var schedulesArray = datajs["Schedules"] as? [[String:Any]] {
                             
-                            destination = schedulesArray[0]["Destination"] as? String ?? "error"
+                           // destination = schedulesArray[0]["Destination"] as? String ?? "error"
                             
-                            print("got destination")
+                            //print("got destination")
                             
                             var index = 0
                             for schedule  in schedulesArray {
                                 schedulesArray[index]["ExpectedCountdown"] = String(schedule["ExpectedCountdown"] as! Int)
                                 schedulesArray[index]["ExpectedLeaveTime"]  = schedule["ExpectedLeaveTime"] as? String ?? " "
+                                schedulesArray[index]["Destination"] = schedule["Destination"] as? String ?? "error"
                                 index = index +  1
                             }
+                            
+                            schedulesArray.sort(by: { Int($0["ExpectedCountdown"] as! String)! < Int($1["ExpectedCountdown"] as! String)! })
                             
                             index = 0
                             for schedule  in schedulesArray {
                                 let min = schedule["ExpectedCountdown"]
                                 let expectedLeaveTime = schedule["ExpectedLeaveTime"]!
+                                let destination = schedule["Destination"]!
                                 
-                                timeMessage.insert("in \(min ?? " ")min    \(expectedLeaveTime)", at: index)
+                                
+                                timeMessage.insert("in \(min ?? " ")min  To: \(destination)   \(expectedLeaveTime)", at: index)
                                 index = index +  1
                                 print(index)
                                 
@@ -261,7 +270,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     dFormatter.dateFormat = "hh:mm a yyyy-MM-dd"
                     
                     let tstr = dFormatter.string(from: ntime)
-                    let businfotitle = "\((self?.stopcodeADD)!)[#\((self?.routenumADD)!)] To: \(destination)"
+                    let businfotitle = "\((self?.stopcodeADD)!)[#\((self?.routenumADD)!)]"
                     //insert a message into coredata
                     _ = MessageMO.CreateMessageMO(m1: timeMessage[0],m2:timeMessage[1],m3:timeMessage[2], messageType: "success", title1: tstr, title2: businfotitle, creation: ntime, busstop: (self?.bustop!)!, in: (self?.context)!
                     )
@@ -349,6 +358,17 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             cell.m2.text = message.m2
             cell.m3.text = message.m3
             
+//            let border = CALayer()
+//            let width = CGFloat(1.0)
+//            self.tableView.separatorColor = UIColor.clear;
+//            border.borderColor = UIColor.green.cgColor
+//            border.frame = CGRect(x: 0, y: cell.frame.size.height - width, width:  cell.frame.size.width, height: cell.frame.size.height)
+//            border.borderWidth = width
+//            cell.layer.addSublayer(border)
+//            cell.layer.masksToBounds = true
+            cell.layer.borderWidth = 1.0
+            cell.layer.borderColor = UIColor.black.cgColor
+            
             return cell
         } else {
             guard let cell = tableView.dequeueReusableCell(withIdentifier: "ErrorUITableViewCell", for: indexPath) as? ErrorUITableViewCell else {
@@ -356,6 +376,20 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
             }
             cell.messageO = message
             cell.textview.text = message.m1
+            
+            cell.layer.borderWidth = 1.0
+            cell.layer.borderColor = UIColor.black.cgColor
+            
+//            let border = CALayer()
+//            let width = CGFloat(1.0)
+//            border.borderColor = UIColor.red.cgColor
+//
+//            let offset_height = tableView.dequeueReusableCell(withIdentifier: "MessageItemTableViewCell")?.frame.height
+//
+//            border.frame = CGRect(x: 0, y: cell.frame.size.height - width - (offset_height ?? 0.0), width:  cell.frame.size.width, height: cell.frame.size.height)
+//            border.borderWidth = width
+//            cell.layer.addSublayer(border)
+//            cell.layer.masksToBounds = true
             return cell
             
         }
