@@ -21,6 +21,8 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     
     @IBOutlet weak var viewTitle: UINavigationItem!
     
+    let refreshcontrol = UIRefreshControl()
+    
     //when clear is tapped
     @IBAction func clearTap(_ sender: UIBarButtonItem) {
         MessageMO.DeleteAllMessageMO(busstop: bustop, context: context)
@@ -57,18 +59,30 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
      var loadingalert: UIAlertController!
     
     
-
-
-    
+    //pull down refresh func
+    @objc func handleRefresh(_ refreshControl: UIRefreshControl) {
+        
+        //get a new  message
+        makeARequest()
+        
+        print("refresh")
+        
+        refreshControl.endRefreshing()
+        
+    }
 
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        //set up pull refresh for table view
+        tableView.refreshControl = refreshcontrol
+        self.refreshcontrol.addTarget(self, action: #selector(handleRefresh(_:)), for: UIControlEvents.valueChanged)
         
-        createAndconfigureActivityIndicatorView()
         
-        self.present(loadingalert!, animated: true, completion: nil)
+        
+        
+        
         
         
         
@@ -146,6 +160,13 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
     
     // make a request to get the info about time of next buses
     func makeARequest() {
+        
+        //get the loading indicator running
+        createAndconfigureActivityIndicatorView()
+        self.present(loadingalert!, animated: true, completion: nil)
+        
+        
+        
         //when internet not available
 //        if(!Reachability.isConnectedToNetwork()) {
 //            errorAlert(errormessage: "Internet not available")
@@ -186,6 +207,8 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     self?.loadingalert.dismiss(animated: true, completion: nil)
                 }
             }
+            
+            
             
             
             switch (response.result) {
