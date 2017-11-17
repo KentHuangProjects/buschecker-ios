@@ -221,13 +221,14 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                 
 //                typealias timm = (min : String, expectedLeaveTime: String)
 //                var timeMessage : [timm] = [timm]()
-                    var timeMessage = [String](repeating: " ", count: 3)
+                var timeMessage = [String](repeating: " ", count: 3)
+                    
                 
-                if let responsejs = response.result.value! as? [[String:Any]] {
-                        let datajs = responsejs[0]
+                
+                if let responsejs = response.result.value! as? [Any],let datajs = responsejs[0] as? [String:Any] {
+
                     
-                    
-                        if let schedulesArray = datajs["Schedules"] as? [[String:Any]] {
+                        if var schedulesArray = datajs["Schedules"] as? [[String:Any]] {
                             
                             destination = schedulesArray[0]["Destination"] as? String ?? "error"
                             
@@ -235,10 +236,17 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                             
                             var index = 0
                             for schedule  in schedulesArray {
-                                let min = String(schedule["ExpectedCountdown"] as! Int)
-                                let expectedLeaveTime = schedule["ExpectedLeaveTime"] as? String ?? " "
+                                schedulesArray[index]["ExpectedCountdown"] = String(schedule["ExpectedCountdown"] as! Int)
+                                schedulesArray[index]["ExpectedLeaveTime"]  = schedule["ExpectedLeaveTime"] as? String ?? " "
+                                index = index +  1
+                            }
+                            
+                            index = 0
+                            for schedule  in schedulesArray {
+                                let min = schedule["ExpectedCountdown"]
+                                let expectedLeaveTime = schedule["ExpectedLeaveTime"]!
                                 
-                                timeMessage.insert("in \(min)min    \(expectedLeaveTime)", at: index)
+                                timeMessage.insert("in \(min ?? " ")min    \(expectedLeaveTime)", at: index)
                                 index = index +  1
                                 print(index)
                                 
