@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		132C59D17E335BE249F5466E /* Pods_BusCheckerUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 95803B426CE8F07BCD8FA791 /* Pods_BusCheckerUITests.framework */; };
 		28DA35290D08D46942F4EB6E /* Pods_BusChecker.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0D49AAFD72BE6837D7A33EDF /* Pods_BusChecker.framework */; };
+		4708F26F1FB4E31B0061ECC6 /* ErrorUITableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 4708F26E1FB4E31B0061ECC6 /* ErrorUITableViewCell.swift */; };
 		475E5DF81F99A7F500CF82E0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 475E5DF71F99A7F500CF82E0 /* AppDelegate.swift */; };
 		475E5DFD1F99A7F500CF82E0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 475E5DFB1F99A7F500CF82E0 /* Main.storyboard */; };
 		475E5E001F99A7F500CF82E0 /* BusChecker.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 475E5DFE1F99A7F500CF82E0 /* BusChecker.xcdatamodeld */; };
@@ -50,6 +51,7 @@
 		1C183F5E5CB26BC3E9B9596A /* Pods-BusChecker.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusChecker.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BusChecker/Pods-BusChecker.debug.xcconfig"; sourceTree = "<group>"; };
 		25B6C6C07F4EBE4001BEF8D1 /* Pods-BusCheckerTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusCheckerTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-BusCheckerTests/Pods-BusCheckerTests.debug.xcconfig"; sourceTree = "<group>"; };
 		28C9147621DEB8A852C8BAD4 /* Pods-BusChecker.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BusChecker.release.xcconfig"; path = "Pods/Target Support Files/Pods-BusChecker/Pods-BusChecker.release.xcconfig"; sourceTree = "<group>"; };
+		4708F26E1FB4E31B0061ECC6 /* ErrorUITableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorUITableViewCell.swift; sourceTree = "<group>"; };
 		475E5DF41F99A7F500CF82E0 /* BusChecker.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BusChecker.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		475E5DF71F99A7F500CF82E0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		475E5DFC1F99A7F500CF82E0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -188,6 +190,7 @@
 			children = (
 				47F56FE01F9DDCF20074179A /* MessageTableViewController.swift */,
 				47F56FE21F9DE23C0074179A /* MessageItemTableViewCell.swift */,
+				4708F26E1FB4E31B0061ECC6 /* ErrorUITableViewCell.swift */,
 			);
 			path = SecondView;
 			sourceTree = "<group>";
@@ -527,6 +530,7 @@
 				E965A70E1F9A83EA0068C025 /* BusStopViewModel.swift in Sources */,
 				475E5E2D1F99C23B00CF82E0 /* BusStopMO.swift in Sources */,
 				477694F41FB3D5F5009BC8B8 /* Reachability.swift in Sources */,
+				4708F26F1FB4E31B0061ECC6 /* ErrorUITableViewCell.swift in Sources */,
 				47F56FE11F9DDCF20074179A /* MessageTableViewController.swift in Sources */,
 				47F56FE31F9DE23C0074179A /* MessageItemTableViewCell.swift in Sources */,
 				475E5DF81F99A7F500CF82E0 /* AppDelegate.swift in Sources */,
@@ -695,7 +699,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 1C183F5E5CB26BC3E9B9596A /* Pods-BusChecker.debug.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "	";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QXWBHRRVR3;
 				INFOPLIST_FILE = BusChecker/Info.plist;
@@ -712,7 +717,8 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 28C9147621DEB8A852C8BAD4 /* Pods-BusChecker.release.xcconfig */;
 			buildSettings = {
-				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_APPICON_NAME = "	";
+				ASSETCATALOG_COMPILER_LAUNCHIMAGE_NAME = LaunchImage;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QXWBHRRVR3;
 				INFOPLIST_FILE = BusChecker/Info.plist;
