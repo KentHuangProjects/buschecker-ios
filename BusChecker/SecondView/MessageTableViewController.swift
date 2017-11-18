@@ -130,7 +130,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
         
         
         
-        self.tableView.separatorColor = UIColor.clear
+        self.tableView.separatorColor = UIColor.black
         
         tableView.reloadData()
         
