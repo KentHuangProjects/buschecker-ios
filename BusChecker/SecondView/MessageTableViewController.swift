@@ -267,7 +267,7 @@ class MessageTableViewController: UITableViewController,NSFetchedResultsControll
                     
                     let ntime = Date()
                     let dFormatter = DateFormatter()
-                    dFormatter.dateFormat = "yyyy-MM-dd hh:mm a	"
+                    dFormatter.dateFormat = "yyyy-MM-dd hh:mm a"
                     
                     let tstr = dFormatter.string(from: ntime)
                     let businfotitle = "\((self?.stopcodeADD)!)[#\((self?.routenumADD)!)]"
