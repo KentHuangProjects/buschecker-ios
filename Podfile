@@ -5,8 +5,10 @@ target 'BusChecker' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
   use_frameworks!
 
+   source 'https://github.com/CocoaPods/Specs.git'
+   pod 'Eureka'
+
   # Pods for BusChecker
-  pod 'Eureka', '~> 4.0'
   pod 'Alamofire', '~> 4.5'
 
 
